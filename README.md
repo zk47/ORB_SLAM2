@@ -238,3 +238,17 @@ This is the default mode. The system runs in parallal three threads: Tracking, L
 ### Localization Mode
 This mode can be used when you have a good map of your working area. In this mode the Local Mapping and Loop Closing are deactivated. The system localizes the camera in the map (which is no longer updated), using relocalization if needed. 
 
+## 我的笔记
+
+rgbd_dataset_freigurg1_xyz这个数据集来自：http://vision.in.tum.de/data/datasets/rgbd-dataset/download。
+
+associate.py这个代码来自：https://cvg.cit.tum.de/data/datasets/rgbd-dataset/tools。它的作用是用来匹配图像和深度图，然后生成向关联的估计文件（比如：new_association.txt）。
+```
+python3 associate.py ./rgbd_dataset_freigurg1_xyz/rgb.txt ./rgbd_dataset_freigurg1_xyz/depth.txt > new_association.txt
+```
+
+
+showtrace.py这个自建（AI写的代码）工具，用于显示轨迹和位姿态：
+```
+python3 showtrace.py ./Examples/RGB-D/CameraTrajectory.txt --axis-length 0.05 --pose-step 10
+```
