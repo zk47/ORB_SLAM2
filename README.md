@@ -252,3 +252,8 @@ showtrace.py这个自建（AI写的代码）工具，用于显示轨迹和位姿
 ```
 python3 showtrace.py ./Examples/RGB-D/CameraTrajectory.txt --axis-length 0.05 --pose-step 10
 ```
+
+RGB-D运行命令
+```
+./Examples/RGB-D/rgbd_tum Vocabulary/ORBvoc.txt Examples/RGB-D/TUMX.yaml PATH_TO_SEQUENCE_FOLDER ASSOCIATIONS_FILE
+```
