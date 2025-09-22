@@ -19,7 +19,7 @@
 */
 
 #include "LoopClosing.h"
-
+#include <unistd.h>  // 用于 usleep 函数声明
 #include "Sim3Solver.h"
 
 #include "Converter.h"
@@ -469,7 +469,7 @@ void LoopClosing::CorrectLoop()
         }
 
         // Correct all MapPoints obsrved by current keyframe and neighbors, so that they align with the other side of the loop
-        for(KeyFrameAndPose::iterator mit=CorrectedSim3.begin(), mend=CorrectedSim3.end(); mit!=mend; mit++)
+        for(auto mit = CorrectedSim3.begin(), mend = CorrectedSim3.end(); mit != mend; ++mit)
         {
             KeyFrame* pKFi = mit->first;
             g2o::Sim3 g2oCorrectedSiw = mit->second;
@@ -588,7 +588,7 @@ void LoopClosing::SearchAndFuse(const KeyFrameAndPose &CorrectedPosesMap)
 {
     ORBmatcher matcher(0.8);
 
-    for(KeyFrameAndPose::const_iterator mit=CorrectedPosesMap.begin(), mend=CorrectedPosesMap.end(); mit!=mend;mit++)
+    for(auto mit = CorrectedPosesMap.begin(), mend = CorrectedPosesMap.end(); mit != mend; ++mit)
     {
         KeyFrame* pKF = mit->first;
 

@@ -32,7 +32,8 @@
 #include <thread>
 #include <mutex>
 #include "Thirdparty/g2o/g2o/types/types_seven_dof_expmap.h"
-
+#include <Eigen/StdVector>  // 必须包含！Eigen 对齐分配器支持 std 容器的关键头文件
+#include <map>              // 确保包含 std::map 的头文件
 namespace ORB_SLAM2
 {
 
@@ -40,14 +41,21 @@ class Tracking;
 class LocalMapping;
 class KeyFrameDatabase;
 
+//namespace ORB_SLAM2 {  // 确保在 ORB_SLAM2 命名空间内（与 KeyFrame 一致）
+
+//}  // namespace ORB_SLAM2
 
 class LoopClosing
 {
 public:
 
     typedef pair<set<KeyFrame*>,int> ConsistentGroup;    
-    typedef map<KeyFrame*,g2o::Sim3,std::less<KeyFrame*>,
-        Eigen::aligned_allocator<std::pair<const KeyFrame*, g2o::Sim3> > > KeyFrameAndPose;
+// 修正：分配器的 pair 第一个参数为 const KeyFrame*
+typedef std::map<KeyFrame*, g2o::Sim3,
+                 std::less<KeyFrame*>,
+                 // 关键修正：value_type 为 std::pair<KeyFrame* const, g2o::Sim3>
+                 Eigen::aligned_allocator<std::pair<KeyFrame* const, g2o::Sim3>>
+                > KeyFrameAndPose;
 
 public:
 

@@ -21,6 +21,7 @@
 
 
 #include "System.h"
+#include <unistd.h>  // 引入 usleep 函数的声明
 #include "Converter.h"
 #include <thread>
 #include <pangolin/pangolin.h>
@@ -98,7 +99,7 @@ System::System(const string &strVocFile, const string &strSettingsFile, const eS
     if(bUseViewer)
     {
         mpViewer = new Viewer(this, mpFrameDrawer,mpMapDrawer,mpTracker,strSettingsFile);
-        mptViewer = new thread(&Viewer::Run, mpViewer);
+        //mptViewer = new thread(&Viewer::Run, mpViewer);
         mpTracker->SetViewer(mpViewer);
     }
 
@@ -489,4 +490,10 @@ vector<cv::KeyPoint> System::GetTrackedKeyPointsUn()
     return mTrackedKeyPointsUn;
 }
 
+void System::RunViewer() {
+    if (mpViewer) {
+        mpViewer->Run();  // 直接在调用线程（主线程）中运行 Viewer
+    }
+
 } //namespace ORB_SLAM
+}

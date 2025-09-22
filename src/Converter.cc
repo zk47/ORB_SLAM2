@@ -62,49 +62,48 @@ cv::Mat Converter::toCvMat(const g2o::Sim3 &Sim3)
 
 cv::Mat Converter::toCvMat(const Eigen::Matrix<double,4,4> &m)
 {
-    cv::Mat cvMat(4,4,CV_32F);
+    cv::Mat mat(4,4,CV_32F);  // 正确：变量名 mat，类型 cv::Mat
     for(int i=0;i<4;i++)
-        for(int j=0; j<4; j++)
-            cvMat.at<float>(i,j)=m(i,j);
-
-    return cvMat.clone();
+        for(int j=0;j<4;j++)
+            mat.at<float>(i,j)=m(i,j);  // 正确：用变量名调用 at()
+    return mat.clone();  // 正确：用变量名调用 clone()
 }
 
 cv::Mat Converter::toCvMat(const Eigen::Matrix3d &m)
 {
-    cv::Mat cvMat(3,3,CV_32F);
+    cv::Mat mat(3,3,CV_32F);
     for(int i=0;i<3;i++)
         for(int j=0; j<3; j++)
-            cvMat.at<float>(i,j)=m(i,j);
+            mat.at<float>(i,j)=m(i,j);
 
-    return cvMat.clone();
+    return mat.clone();
 }
 
 cv::Mat Converter::toCvMat(const Eigen::Matrix<double,3,1> &m)
 {
-    cv::Mat cvMat(3,1,CV_32F);
+    cv::Mat mat(3,1,CV_32F);
     for(int i=0;i<3;i++)
-            cvMat.at<float>(i)=m(i);
+            mat.at<float>(i)=m(i);
 
-    return cvMat.clone();
+    return mat.clone();
 }
 
 cv::Mat Converter::toCvSE3(const Eigen::Matrix<double,3,3> &R, const Eigen::Matrix<double,3,1> &t)
 {
-    cv::Mat cvMat = cv::Mat::eye(4,4,CV_32F);
+    cv::Mat mat = cv::Mat::eye(4,4,CV_32F);
     for(int i=0;i<3;i++)
     {
         for(int j=0;j<3;j++)
         {
-            cvMat.at<float>(i,j)=R(i,j);
+            mat.at<float>(i,j)=R(i,j);
         }
     }
     for(int i=0;i<3;i++)
     {
-        cvMat.at<float>(i,3)=t(i);
+        mat.at<float>(i,3)=t(i);
     }
 
-    return cvMat.clone();
+    return mat.clone();
 }
 
 Eigen::Matrix<double,3,1> Converter::toVector3d(const cv::Mat &cvVector)

@@ -19,6 +19,7 @@
 */
 
 #include "LocalMapping.h"
+#include <unistd.h>  // 用于 usleep 函数声明
 #include "LoopClosing.h"
 #include "ORBmatcher.h"
 #include "Optimizer.h"

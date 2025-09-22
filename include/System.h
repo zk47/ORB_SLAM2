@@ -121,7 +121,7 @@ public:
     int GetTrackingState();
     std::vector<MapPoint*> GetTrackedMapPoints();
     std::vector<cv::KeyPoint> GetTrackedKeyPointsUn();
-
+    void RunViewer();  // 新增声明
 private:
 
     // Input sensor
