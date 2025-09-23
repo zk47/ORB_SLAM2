@@ -257,3 +257,6 @@ RGB-D运行命令
 ```
 ./Examples/RGB-D/rgbd_tum Vocabulary/ORBvoc.txt Examples/RGB-D/TUMX.yaml PATH_TO_SEQUENCE_FOLDER ASSOCIATIONS_FILE
 ```
+
+参考文章：
+1. https://blog.csdn.net/qq_42257666/article/details/130196559
